@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DecisionViewController: UIViewController {
+class DecisionViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

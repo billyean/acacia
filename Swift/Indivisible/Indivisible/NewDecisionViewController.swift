@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewDecisionViewController: UIViewController {
+class NewDecisionViewController: UIPageViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

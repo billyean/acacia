@@ -13,10 +13,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if defaults.objectForKey("userLoggedIn") == nil {
+            showLoginView()
+        }
         // Override point for customization after application launch.
         return true
+    }
+        
+    func showLoginView(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let loginViewController = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as? LoginViewController
+//            self.window?.makeKeyAndVisible()
+//            self.window?.rootViewController?.presentViewController(loginViewController!, animated: true, completion: nil)
+        self.window?.rootViewController = loginViewController
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -40,12 +51,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-    func showLoginScreen(animated: Bool) {
-        let storyboard = UIStoryboard.init(name: "MainStoryboard", bundle: nil);
-        storyboard.instantiateViewControllerWithIdentifier("loginScreen");
-    }
-
-
 }
 
