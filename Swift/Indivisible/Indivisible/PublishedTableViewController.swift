@@ -48,6 +48,7 @@ class PublishedTableViewController: UITableViewController {
         }
         task.resume()
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+        tableView.rowHeight = 120
     }
     
     override func didReceiveMemoryWarning() {
@@ -67,23 +68,38 @@ class PublishedTableViewController: UITableViewController {
         let cellId = "DecisionId"
         
         if let cell = tableView.dequeueReusableCellWithIdentifier(cellId) {
-            let decision = publishedDecisions[indexPath.row]
-            cell.textLabel?.text = String(decision["title"]!)
-            cell.imageView?.image = UIImage(data: (decision["tileViewImage"]?.dataUsingEncoding(NSASCIIStringEncoding)!)!)
             return cell
         } else {
-            let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: cellId)
+            let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: cellId)
+            cell.separatorInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
+            
             let decision = publishedDecisions[indexPath.row]
-            cell.textLabel?.text = String(decision["title"]!)
+            let state = String(decision["state"]!)
+            cell.textLabel?.text = "State: \(state)"
+            cell.textLabel?.font = UIFont(name: "Calibri", size: 20)
+            
+            cell.detailTextLabel?.numberOfLines = 3
+            cell.detailTextLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
+            cell.detailTextLabel?.text = String(decision["title"]!)
+            cell.detailTextLabel?.font = UIFont(name: "Calibri", size: 16)
             
             let imgStr = String(decision["tileViewImage"]!)
             let base64Img = imgStr[imgStr.startIndex.advancedBy(22)..<imgStr.endIndex]
             
             let dataDecoded = NSData(base64EncodedString: base64Img, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
-            cell.imageView?.image = UIImage(data: dataDecoded)
-            cell.textLabel?.font = UIFont.systemFontOfSize(14)
+            let size = CGSize(width: 80, height: 80)
+            cell.imageView?.image = imageWithImage(UIImage(data: dataDecoded)!, scaledToSize: size)
+            
             return cell
         }
         
+    }
+    
+    func imageWithImage(image:UIImage, scaledToSize newSize:CGSize) -> UIImage{
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0);
+        image.drawInRect(CGRectMake(0, 0, newSize.width, newSize.height))
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
     }
 }
