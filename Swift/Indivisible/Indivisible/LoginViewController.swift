@@ -50,6 +50,8 @@ class LoginViewController: UIViewController {
                 if let jsonResult=try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary {
                     print("AsSynchronous\(jsonResult)")
                     if let token = jsonResult.objectForKey("access_token") {
+                        let userDefault = NSUserDefaults.standardUserDefaults()
+                        userDefault.setObject(token, forKey: "access_token")
                         dispatch_async(dispatch_get_main_queue()) { [unowned self] in
                             self.performSegueWithIdentifier("loginSucceed", sender: self)
                         }

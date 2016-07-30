@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="xVe-es-0J5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="xVe-es-0J5">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -102,7 +102,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="ISI-Qy-Gj9" kind="relationship" relationship="viewControllers" id="Dzs-fd-aTF"/>
+                        <segue destination="m0w-iD-mD4" kind="relationship" relationship="viewControllers" id="Dzs-fd-aTF"/>
                         <segue destination="86E-fC-yRy" kind="relationship" relationship="viewControllers" id="N6L-4C-Ufj"/>
                         <segue destination="12g-WU-2eX" kind="relationship" relationship="viewControllers" id="yDE-rG-Ub4"/>
                         <segue destination="BY3-tZ-PQV" kind="relationship" relationship="viewControllers" id="kTJ-8h-6Uy"/>
@@ -112,37 +112,39 @@
             </objects>
             <point key="canvasLocation" x="448" y="0.0"/>
         </scene>
-        <!--Desion-->
+        <!--Decision View Controller-->
         <scene sceneID="XZx-H4-4oW">
             <objects>
                 <tableViewController id="ISI-Qy-Gj9" customClass="DecisionViewController" customModule="Indivisible" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="UQE-zv-Vp0">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="NnJ-8X-Dar">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="DQ0-FB-tXw">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DQ0-FB-tXw" id="ItE-Qj-2bq">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections/>
                         <connections>
-                            <outlet property="dataSource" destination="ISI-Qy-Gj9" id="FCJ-56-5Ct"/>
-                            <outlet property="delegate" destination="ISI-Qy-Gj9" id="wQV-wh-heP"/>
+                            <outlet property="dataSource" destination="ISI-Qy-Gj9" id="s9e-un-ahO"/>
+                            <outlet property="delegate" destination="ISI-Qy-Gj9" id="tuF-G6-yH5"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Desion" image="library.png" id="I2t-00-0XE">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="dHX-bJ-GoL"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="dtS-GC-j5l" kind="push" identifier="PublishedSegue" id="lhP-mt-hvt"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lb8-PW-EOB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="599" y="-715"/>
+            <point key="canvasLocation" x="1131" y="-715"/>
+        </scene>
+        <!--Published Table View Controller-->
+        <scene sceneID="tN3-5J-Br4">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dz0-jY-DyX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="dtS-GC-j5l" customClass="PublishedTableViewController" customModule="Indivisible" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="lgr-IT-wgg"/>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="1527" y="-985"/>
         </scene>
         <!--New Decision-->
         <scene sceneID="5bZ-kf-GKb">
@@ -153,7 +155,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="45v-Bb-dks" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="952" y="-481"/>
+            <point key="canvasLocation" x="1759" y="-310"/>
         </scene>
         <!--Dashboard-->
         <scene sceneID="PRp-Se-C4m">
@@ -214,6 +216,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aZg-xZ-Zg3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="671" y="789"/>
+        </scene>
+        <!--Desion-->
+        <scene sceneID="ZuM-e0-7k8">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="m0w-iD-mD4" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Desion" image="library.png" id="I2t-00-0XE">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vhg-oE-JdK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ISI-Qy-Gj9" kind="relationship" relationship="rootViewController" id="Icj-4b-KnV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f8W-2F-WFl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="599" y="-715"/>
         </scene>
     </scenes>
     <resources>
