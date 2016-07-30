@@ -117,7 +117,7 @@
             </objects>
             <point key="canvasLocation" x="840" y="0.0"/>
         </scene>
-        <!--Decision View Controller-->
+        <!--Decision-->
         <scene sceneID="XZx-H4-4oW">
             <objects>
                 <tableViewController id="ISI-Qy-Gj9" customClass="DecisionViewController" customModule="Indivisible" customModuleProvider="target" sceneMemberID="viewController">
@@ -131,7 +131,7 @@
                             <outlet property="delegate" destination="ISI-Qy-Gj9" id="tuF-G6-yH5"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="dHX-bJ-GoL"/>
+                    <navigationItem key="navigationItem" title="Decision" id="dHX-bJ-GoL"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="dtS-GC-j5l" kind="show" identifier="PublishedSegue" id="lhP-mt-hvt"/>
@@ -141,11 +141,14 @@
             </objects>
             <point key="canvasLocation" x="2120.625" y="-755.28169014084506"/>
         </scene>
-        <!--Published Table View Controller-->
+        <!--Decision Detail Table View Controller-->
         <scene sceneID="tN3-5J-Br4">
             <objects>
-                <tableViewController id="dtS-GC-j5l" customClass="PublishedTableViewController" customModule="Indivisible" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="dtS-GC-j5l" customClass="DecisionDetailTableViewController" customModule="Indivisible" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="lgr-IT-wgg"/>
+                    <connections>
+                        <outlet property="navigationTopBar" destination="lgr-IT-wgg" id="tjb-yl-08P"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dz0-jY-DyX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -225,6 +228,7 @@
         <!--Desion-->
         <scene sceneID="ZuM-e0-7k8">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f8W-2F-WFl" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="m0w-iD-mD4" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Desion" image="library.png" id="I2t-00-0XE">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
@@ -239,7 +243,6 @@
                         <segue destination="ISI-Qy-Gj9" kind="relationship" relationship="rootViewController" id="Icj-4b-KnV"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="f8W-2F-WFl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1123.125" y="-755.28169014084506"/>
         </scene>

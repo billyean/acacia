@@ -9,6 +9,7 @@
 import UIKit
 
 class DecisionViewController: UITableViewController {
+    var selection = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,18 +64,32 @@ class DecisionViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 //        let cell = tableView.cellForRowAtIndexPath(indexPath)
 //        cell?.textLabel?.text = " I was changed"
-        switch(indexPath.row) {
-        case 0:
-            performSegueWithIdentifier("PublishedSegue", sender: nil)
-        default:
-            performSegueWithIdentifier("PublishedSegue", sender: nil)
-        }
+//        switch(indexPath.row) {
+//        case 0:
+//            performSegueWithIdentifier("PublishedSegue", sender: nil)
+//        default:
+//            performSegueWithIdentifier("PublishedSegue", sender: nil)
+//        }
+        selection = indexPath.row
+        performSegueWithIdentifier("PublishedSegue", sender: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let targetVC = segue.destinationViewController
-        print("%s", segue.identifier)
-        print("%s", targetVC.title)
+        let targetVC  = segue.destinationViewController as? DecisionDetailTableViewController
+        switch (selection) {
+        case 0:
+            targetVC?.setTab("PUBLISHED")
+        case 1:
+            targetVC?.setTab("IN_PROCESS")
+        case 2:
+            targetVC?.setTab("FINISHED")
+        case 3:
+            targetVC?.setTab("COMPLETED")
+        default:
+            targetVC?.setTab("READY_TO_PUBLISH")
+        }
+//        print("%s", segue.identifier)
+//        print("%s", targetVC.title)
         
     }
     

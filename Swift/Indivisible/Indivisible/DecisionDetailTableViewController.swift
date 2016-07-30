@@ -8,15 +8,35 @@
 
 import UIKit
 
-class PublishedTableViewController: UITableViewController {
+class DecisionDetailTableViewController: UITableViewController {
+    
+    var TAB_NAME:String = ""
     
     var publishedDecisions: [NSDictionary] = []
+    
+    @IBOutlet var navigationTopBar: UINavigationItem!
+    
+    func setTab(tabName: String) {
+        TAB_NAME = tabName
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        switch (TAB_NAME) {
+        case "PUBLISHED":
+            navigationTopBar?.title = "Published Decision"
+        case "IN_PROCESS":
+            navigationTopBar?.title = "In Process Decision"
+        case "FINISHED":
+            navigationTopBar?.title = "Finished Decision"
+        case "COMPLETED":
+            navigationTopBar?.title = "Completed Decision"
+        default:
+            navigationTopBar?.title = "Saved Decision"
+        }
         
-        let url: NSURL = NSURL(string: "http://www.indivigroup.com:8080/Indivisible_API/decisions/corp?status=PUBLISHED")!
+        let url: NSURL = NSURL(string: "http://www.indivigroup.com:8080/Indivisible_API/decisions/corp?status=\(TAB_NAME)")!
         let request = NSMutableURLRequest(URL: url)
         let session = NSURLSession.sharedSession()
         request.HTTPMethod = "GET"

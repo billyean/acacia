@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		820E3DB71D4C0B310096AF08 /* PublishedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820E3DB61D4C0B310096AF08 /* PublishedTableViewController.swift */; };
+		8220651B1D4CF2ED003D2EE3 /* DecisionDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8220651A1D4CF2ED003D2EE3 /* DecisionDetailTableViewController.swift */; };
 		824C21561D35498300D9B5C3 /* business.png in Resources */ = {isa = PBXBuildFile; fileRef = 824C21551D35498300D9B5C3 /* business.png */; };
 		824C215A1D3551AE00D9B5C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824C21591D3551AE00D9B5C3 /* LoginViewController.swift */; };
 		824C215C1D3552A300D9B5C3 /* DecisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824C215B1D3552A300D9B5C3 /* DecisionViewController.swift */; };
@@ -25,7 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		820E3DB61D4C0B310096AF08 /* PublishedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishedTableViewController.swift; sourceTree = "<group>"; };
+		8220651A1D4CF2ED003D2EE3 /* DecisionDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecisionDetailTableViewController.swift; sourceTree = "<group>"; };
 		824C21551D35498300D9B5C3 /* business.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = business.png; path = ../../../../Pictures/business.png; sourceTree = "<group>"; };
 		824C21591D3551AE00D9B5C3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		824C215B1D3552A300D9B5C3 /* DecisionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecisionViewController.swift; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 				824C215D1D3552BD00D9B5C3 /* NewDecisionViewController.swift */,
 				824C215F1D3552CF00D9B5C3 /* DashboardViewController.swift */,
 				824C21611D3552E600D9B5C3 /* AccountViewController.swift */,
-				820E3DB61D4C0B310096AF08 /* PublishedTableViewController.swift */,
+				8220651A1D4CF2ED003D2EE3 /* DecisionDetailTableViewController.swift */,
 			);
 			path = Indivisible;
 			sourceTree = "<group>";
@@ -172,7 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				824C215A1D3551AE00D9B5C3 /* LoginViewController.swift in Sources */,
-				820E3DB71D4C0B310096AF08 /* PublishedTableViewController.swift in Sources */,
+				8220651B1D4CF2ED003D2EE3 /* DecisionDetailTableViewController.swift in Sources */,
 				824C215E1D3552BD00D9B5C3 /* NewDecisionViewController.swift in Sources */,
 				824C21621D3552E600D9B5C3 /* AccountViewController.swift in Sources */,
 				824C21601D3552CF00D9B5C3 /* DashboardViewController.swift in Sources */,
