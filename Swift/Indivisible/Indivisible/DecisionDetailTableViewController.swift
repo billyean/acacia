@@ -10,37 +10,68 @@ import UIKit
 
 class DecisionDetailTableViewController: UITableViewController {
     
-    var TAB_NAME:String = ""
+    var tabName:String = ""
     
     var publishedDecisions: [NSDictionary] = []
     
     @IBOutlet var navigationTopBar: UINavigationItem!
     
+    var personel_view = false
+    
     func setTab(tabName: String) {
-        TAB_NAME = tabName
+        self.tabName = tabName
+    }
+    
+    func decisionsUri(tabName: String) -> String {
+        if personel_view {
+            switch (tabName) {
+            case "Public":
+                return "decisions/secured?page=0&accessLevel=PUBLIC"
+            case "Private":
+                return "decisions/secured?page=0&accessLevel=TARGET_AUDIENCE"
+            case "Joined":
+                return "decisions/my/joined?page=0"
+            case "Created":
+                return "decisions/user?status=READY_TO_PUBLISH"
+            case "Published":
+                return "decisions/user?status=PUBLISHED"
+            default:
+                return "decisions/user?status=FINISHED"
+            }
+        } else {
+            switch (tabName) {
+            case "Published":
+                return "decisions/corp?status=PUBLISHED"
+            case "In Process":
+                return "decisions/corp?status=IN_PROCESS"
+            case "Finished":
+                return "decisions/corp?status=FINISHED"
+            case "Completed":
+                return "decisions/corp?status=COMPLETED"
+            default:
+                return "decisions/corp?status=READY_TO_PUBLISH"
+            }
+        }
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        switch (TAB_NAME) {
-        case "PUBLISHED":
-            navigationTopBar?.title = "Published Decision"
-        case "IN_PROCESS":
-            navigationTopBar?.title = "In Process Decision"
-        case "FINISHED":
-            navigationTopBar?.title = "Finished Decision"
-        case "COMPLETED":
-            navigationTopBar?.title = "Completed Decision"
-        default:
-            navigationTopBar?.title = "Saved Decision"
-        }
         
-        let url: NSURL = NSURL(string: "http://www.indivigroup.com:8080/Indivisible_API/decisions/corp?status=\(TAB_NAME)")!
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        let authories = userDefault.arrayForKey("authorities") as? [String]
+        personel_view = authories! == ["ROLE_PUBLIC_USER"]
+        navigationTopBar?.title = "\(tabName) Decisions"
+        
+        let uri = decisionsUri(tabName)
+        
+        let url: NSURL = NSURL(string: "http://www.indivigroup.com:8080/Indivisible_API/\(uri)")!
         let request = NSMutableURLRequest(URL: url)
         let session = NSURLSession.sharedSession()
         request.HTTPMethod = "GET"
-        let userDefault = NSUserDefaults.standardUserDefaults()
         let user_token = userDefault.stringForKey("access_token")!
         let token = "Bearer \(user_token)"
         
@@ -52,8 +83,6 @@ class DecisionDetailTableViewController: UITableViewController {
             if let httpError = error {
                 print("\(httpError)")
             } else {
-
-                //print("data=\(data)")
                 do{
                 if let jsonResult=try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as? [NSDictionary] {
                     print("AsSynchronous\(jsonResult)")
@@ -109,7 +138,6 @@ class DecisionDetailTableViewController: UITableViewController {
             let dataDecoded = NSData(base64EncodedString: base64Img, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
             let size = CGSize(width: 80, height: 80)
             cell.imageView?.image = imageWithImage(UIImage(data: dataDecoded)!, scaledToSize: size)
-            
             return cell
         }
         

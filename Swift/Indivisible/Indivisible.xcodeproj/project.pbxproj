@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		8220651B1D4CF2ED003D2EE3 /* DecisionDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8220651A1D4CF2ED003D2EE3 /* DecisionDetailTableViewController.swift */; };
+		8220651D1D4CFCAB003D2EE3 /* favicon.ico in Resources */ = {isa = PBXBuildFile; fileRef = 8220651C1D4CFCAB003D2EE3 /* favicon.ico */; };
 		824C21561D35498300D9B5C3 /* business.png in Resources */ = {isa = PBXBuildFile; fileRef = 824C21551D35498300D9B5C3 /* business.png */; };
 		824C215A1D3551AE00D9B5C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824C21591D3551AE00D9B5C3 /* LoginViewController.swift */; };
 		824C215C1D3552A300D9B5C3 /* DecisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824C215B1D3552A300D9B5C3 /* DecisionViewController.swift */; };
 		824C215E1D3552BD00D9B5C3 /* NewDecisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824C215D1D3552BD00D9B5C3 /* NewDecisionViewController.swift */; };
 		824C21601D3552CF00D9B5C3 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824C215F1D3552CF00D9B5C3 /* DashboardViewController.swift */; };
 		824C21621D3552E600D9B5C3 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824C21611D3552E600D9B5C3 /* AccountViewController.swift */; };
+		82BCAAF81D4D5565007FC6FC /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BCAAF71D4D5565007FC6FC /* KeychainWrapper.m */; };
+		82BCAAFC1D4D691F007FC6FC /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BCAAFB1D4D691F007FC6FC /* SignupViewController.swift */; };
 		82E63C461D34CC52001D487B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E63C451D34CC52001D487B /* AppDelegate.swift */; };
 		82E63C4D1D34CC52001D487B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82E63C4B1D34CC52001D487B /* Main.storyboard */; };
 		82E63C4F1D34CC52001D487B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82E63C4E1D34CC52001D487B /* Assets.xcassets */; };
@@ -26,12 +29,17 @@
 
 /* Begin PBXFileReference section */
 		8220651A1D4CF2ED003D2EE3 /* DecisionDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecisionDetailTableViewController.swift; sourceTree = "<group>"; };
+		8220651C1D4CFCAB003D2EE3 /* favicon.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; name = favicon.ico; path = ../../../indivisible.ci/modules/ui/app/favicon.ico; sourceTree = "<group>"; };
 		824C21551D35498300D9B5C3 /* business.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = business.png; path = ../../../../Pictures/business.png; sourceTree = "<group>"; };
 		824C21591D3551AE00D9B5C3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		824C215B1D3552A300D9B5C3 /* DecisionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecisionViewController.swift; sourceTree = "<group>"; };
 		824C215D1D3552BD00D9B5C3 /* NewDecisionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDecisionViewController.swift; sourceTree = "<group>"; };
 		824C215F1D3552CF00D9B5C3 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		824C21611D3552E600D9B5C3 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		82BCAAF51D4D5564007FC6FC /* Indivisible-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Indivisible-Bridging-Header.h"; sourceTree = "<group>"; };
+		82BCAAF61D4D5565007FC6FC /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
+		82BCAAF71D4D5565007FC6FC /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
+		82BCAAFB1D4D691F007FC6FC /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		82E63C421D34CC52001D487B /* Indivisible.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Indivisible.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82E63C451D34CC52001D487B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82E63C4C1D34CC52001D487B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -58,6 +66,7 @@
 		82E63C391D34CC52001D487B = {
 			isa = PBXGroup;
 			children = (
+				8220651C1D4CFCAB003D2EE3 /* favicon.ico */,
 				824C21551D35498300D9B5C3 /* business.png */,
 				82E63C611D34DA8D001D487B /* library.png */,
 				82E63C621D34DA8D001D487B /* space-rocket.png */,
@@ -90,6 +99,10 @@
 				824C215F1D3552CF00D9B5C3 /* DashboardViewController.swift */,
 				824C21611D3552E600D9B5C3 /* AccountViewController.swift */,
 				8220651A1D4CF2ED003D2EE3 /* DecisionDetailTableViewController.swift */,
+				82BCAAF61D4D5565007FC6FC /* KeychainWrapper.h */,
+				82BCAAF71D4D5565007FC6FC /* KeychainWrapper.m */,
+				82BCAAF51D4D5564007FC6FC /* Indivisible-Bridging-Header.h */,
+				82BCAAFB1D4D691F007FC6FC /* SignupViewController.swift */,
 			);
 			path = Indivisible;
 			sourceTree = "<group>";
@@ -155,6 +168,7 @@
 			files = (
 				82E63C521D34CC52001D487B /* LaunchScreen.storyboard in Resources */,
 				82E63C671D34DA8D001D487B /* statsbar.png in Resources */,
+				8220651D1D4CFCAB003D2EE3 /* favicon.ico in Resources */,
 				82E63C4F1D34CC52001D487B /* Assets.xcassets in Resources */,
 				824C21561D35498300D9B5C3 /* business.png in Resources */,
 				82E63C4D1D34CC52001D487B /* Main.storyboard in Resources */,
@@ -171,7 +185,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82BCAAFC1D4D691F007FC6FC /* SignupViewController.swift in Sources */,
 				824C215A1D3551AE00D9B5C3 /* LoginViewController.swift in Sources */,
+				82BCAAF81D4D5565007FC6FC /* KeychainWrapper.m in Sources */,
 				8220651B1D4CF2ED003D2EE3 /* DecisionDetailTableViewController.swift in Sources */,
 				824C215E1D3552BD00D9B5C3 /* NewDecisionViewController.swift in Sources */,
 				824C21621D3552E600D9B5C3 /* AccountViewController.swift in Sources */,
@@ -290,10 +306,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Indivisible/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tristan.Indivisible;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Indivisible/Indivisible-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -301,10 +320,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Indivisible/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tristan.Indivisible;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Indivisible/Indivisible-Bridging-Header.h";
 			};
 			name = Release;
 		};

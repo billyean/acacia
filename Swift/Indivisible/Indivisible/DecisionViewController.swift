@@ -10,10 +10,19 @@ import UIKit
 
 class DecisionViewController: UITableViewController {
     var selection = 0
+    
+    let public_selections = ["Public", "Private","Joined", "Created" , "Published", "Finished"]
+    
+    let admin_selections = ["Published", "In Process", "Finished", "Completed", "Saved"]
+    
+    var personel_view = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        let authories = userDefault.arrayForKey("authorities") as? [String]
+        personel_view = authories! == ["ROLE_PUBLIC_USER"]
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,30 +35,15 @@ class DecisionViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return personel_view ? public_selections.count : admin_selections.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cellId:String
         var label: String
         
-        switch(indexPath.row) {
-        case 0:
-            cellId = "PublishedCell"
-            label = "Published"
-        case 1:
-            cellId = "InProgressCell"
-            label = "In Process"
-        case 2:
-            cellId = "FinishedCell"
-            label = "Finished"
-        case 3:
-            cellId = "CompletedCell"
-            label = "Completed"
-        default:
-            cellId = "SavedCell"
-            label = "Saved"
-        }
+        cellId = "DecisionCell"
+        label = personel_view ? public_selections[indexPath.row] : admin_selections[indexPath.row]
         
         if let cell = tableView.dequeueReusableCellWithIdentifier(cellId) {
             return cell
@@ -57,40 +51,19 @@ class DecisionViewController: UITableViewController {
             let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: cellId)
             cell.textLabel?.text = label
             cell.textLabel?.font = UIFont.systemFontOfSize(24)
+            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             return cell
         }
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        let cell = tableView.cellForRowAtIndexPath(indexPath)
-//        cell?.textLabel?.text = " I was changed"
-//        switch(indexPath.row) {
-//        case 0:
-//            performSegueWithIdentifier("PublishedSegue", sender: nil)
-//        default:
-//            performSegueWithIdentifier("PublishedSegue", sender: nil)
-//        }
         selection = indexPath.row
         performSegueWithIdentifier("PublishedSegue", sender: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let targetVC  = segue.destinationViewController as? DecisionDetailTableViewController
-        switch (selection) {
-        case 0:
-            targetVC?.setTab("PUBLISHED")
-        case 1:
-            targetVC?.setTab("IN_PROCESS")
-        case 2:
-            targetVC?.setTab("FINISHED")
-        case 3:
-            targetVC?.setTab("COMPLETED")
-        default:
-            targetVC?.setTab("READY_TO_PUBLISH")
-        }
-//        print("%s", segue.identifier)
-//        print("%s", targetVC.title)
-        
+        targetVC?.setTab(personel_view ? public_selections[selection] : admin_selections[selection])
     }
     
 

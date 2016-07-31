@@ -14,6 +14,8 @@ class LoginViewController: UIViewController {
     
     @IBOutlet var password: UITextField!
     
+    @IBOutlet var rememberUsername: UISwitch!
+    
     @IBAction func signIn(sender: AnyObject) {
         if let userNameTxt = userName.text, let passwordTxt = password.text {
             if (userNameTxt != "" && passwordTxt != "" ) {
@@ -27,6 +29,13 @@ class LoginViewController: UIViewController {
         userName.resignFirstResponder()
         password.resignFirstResponder()
 
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let rememberMe = userDefaults.boolForKey("rememberMe")
+        if rememberMe {
+            rememberUsername.setOn(true, animated: true)
+            userName.text = userDefaults.objectForKey("username") as? String
+        }
+        
         // Do any additional setup after loading the view.
     }
 
@@ -36,6 +45,12 @@ class LoginViewController: UIViewController {
     }
     
     func login(user: String, pass: String) {
+        if rememberUsername.on {
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            userDefaults.setValue(user, forKey: "username")
+            userDefaults.setValue(true, forKey: "rememberMe")
+        }
+        
         let url: NSURL = NSURL(string: "http://www.indivigroup.com:8080/Indivisible_API/oauth/token")!
         let request = NSMutableURLRequest(URL: url)
         let session = NSURLSession.sharedSession()
@@ -47,21 +62,45 @@ class LoginViewController: UIViewController {
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         
         let task = session.dataTaskWithRequest(request){data, response, error in
-            print("data=\(data)")
+            var serverCallFailed = true
             do{
-                if let jsonResult=try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary {
-                    print("AsSynchronous\(jsonResult)")
-                    if let token = jsonResult.objectForKey("access_token") {
-                        let userDefault = NSUserDefaults.standardUserDefaults()
-                        userDefault.setObject(token, forKey: "access_token")
-                        dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-                            self.performSegueWithIdentifier("loginSucceed", sender: self)
+                if let servererror = error {
+                    serverCallFailed = true
+                } else {
+                    if let jsonResult=try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary {
+                        print("AsSynchronous\(jsonResult)")
+                        if let json_error = jsonResult.objectForKey("error") {
+                            let alertView = UIAlertController(title: "Login Failed",
+                                                              message: "The Username or Password you entered is incorrect. Please click 'Try Again' to reenter you Username and Password" as String, preferredStyle:.Alert)
+                            let okAction = UIAlertAction(title: "Try Again!", style: .Default, handler: nil)
+                            alertView.addAction(okAction)
+                            dispatch_async(dispatch_get_main_queue()) {
+                                self.presentViewController(alertView, animated: true, completion: nil)
+                            }
+                        } else {
+                            if let token = jsonResult.objectForKey("access_token") {
+                                let userDefault = NSUserDefaults.standardUserDefaults()
+                                userDefault.setObject(token, forKey: "access_token")
+                                if let authorities = jsonResult.objectForKey("authorities") {
+                                    userDefault.setObject(authorities, forKey: "authorities")
+                                }
+                                dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                                    self.performSegueWithIdentifier("loginSucceed", sender: self)
+                                }
+                            }
                         }
+                        serverCallFailed = false
                     }
                 }
-                
             } catch let error as NSError {
                 print("An error occurred: \(error)")
+            }
+            if serverCallFailed {
+                let alertView = UIAlertController(title: "Server Error",
+                                                  message: "We're experiencing server issue right now, please try again later." as String, preferredStyle:.Alert)
+                let okAction = UIAlertAction(title: "Failed Again!", style: .Default, handler: nil)
+                alertView.addAction(okAction)
+                self.presentViewController(alertView, animated: true, completion: nil)
             }
         }
         task.resume()
