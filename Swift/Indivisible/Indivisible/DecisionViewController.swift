@@ -50,7 +50,7 @@ class DecisionViewController: UITableViewController {
         } else {
             let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: cellId)
             cell.textLabel?.text = label
-            cell.textLabel?.font = UIFont.systemFontOfSize(24)
+            cell.textLabel?.font = UIFont(name: "Calibre", size: 16)
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             return cell
         }

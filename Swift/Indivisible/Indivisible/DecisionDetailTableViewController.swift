@@ -22,6 +22,17 @@ class DecisionDetailTableViewController: UITableViewController {
         self.tabName = tabName
     }
     
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let joinedAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Join"){ action, indexPath in
+            
+        }
+        return [joinedAction]
+    }
+    
     func decisionsUri(tabName: String) -> String {
         if personel_view {
             switch (tabName) {

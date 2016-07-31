@@ -234,9 +234,9 @@
                     </tabBar>
                     <connections>
                         <segue destination="m0w-iD-mD4" kind="relationship" relationship="viewControllers" id="Dzs-fd-aTF"/>
-                        <segue destination="86E-fC-yRy" kind="relationship" relationship="viewControllers" id="N6L-4C-Ufj"/>
-                        <segue destination="12g-WU-2eX" kind="relationship" relationship="viewControllers" id="yDE-rG-Ub4"/>
-                        <segue destination="BY3-tZ-PQV" kind="relationship" relationship="viewControllers" id="kTJ-8h-6Uy"/>
+                        <segue destination="inT-QB-12z" kind="relationship" relationship="viewControllers" id="6oY-tm-Gvz"/>
+                        <segue destination="86E-fC-yRy" kind="relationship" relationship="viewControllers" id="t8w-H3-cfT"/>
+                        <segue destination="12g-WU-2eX" kind="relationship" relationship="viewControllers" id="sJC-DL-QFL"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PY9-9M-i5E" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -280,16 +280,30 @@
             </objects>
             <point key="canvasLocation" x="2863.125" y="-1040.4929577464789"/>
         </scene>
-        <!--New Decision-->
-        <scene sceneID="5bZ-kf-GKb">
+        <!--New Decision View Controller-->
+        <scene sceneID="b7V-Kc-Hg2">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="BY3-tZ-PQV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="New Decision" image="space-rocket.png" id="td0-zo-sgo"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                </pageViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="45v-Bb-dks" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="ckK-p1-d7h" customClass="NewDecisionViewController" customModule="Indivisible" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="24" sectionFooterHeight="18" id="32D-hv-8eY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="ckK-p1-d7h" id="UcY-8l-qMg"/>
+                            <outlet property="delegate" destination="ckK-p1-d7h" id="Wbi-S7-URr"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="b5d-8u-qNc">
+                        <barButtonItem key="rightBarButtonItem" title="Publish" style="plain" id="ChI-KP-amS"/>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qVZ-r5-Ifm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2940" y="-114.08450704225351"/>
+            <point key="canvasLocation" x="3694" y="214"/>
         </scene>
         <!--Dashboard-->
         <scene sceneID="PRp-Se-C4m">
@@ -329,16 +343,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="3UB-Ql-KZN">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3UB-Ql-KZN" id="lVC-qB-uUh">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="12g-WU-2eX" id="Q3v-FB-gD1"/>
                             <outlet property="delegate" destination="12g-WU-2eX" id="dAz-CO-wPb"/>
@@ -371,6 +375,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f8W-2F-WFl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1123.125" y="-755.28169014084506"/>
+        </scene>
+        <!--New Decision-->
+        <scene sceneID="KPy-Ck-bgz">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="inT-QB-12z" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="New Decision" image="space-rocket.png" id="EvY-SN-Jju"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZFu-x5-MrE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ckK-p1-d7h" kind="relationship" relationship="rootViewController" id="XuM-EX-Zgo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Maf-n0-Yee" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2941" y="240"/>
         </scene>
     </scenes>
     <resources>
