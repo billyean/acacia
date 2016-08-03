@@ -97,7 +97,7 @@ class AccountViewController: UITableViewController {
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 4
+        return 3
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -122,6 +122,15 @@ class AccountViewController: UITableViewController {
         }
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        switch (indexPath.section, indexPath.row) {
+            case (0, 0):
+                performSegueWithIdentifier("editIcon", sender: nil)
+            default:
+                break;
+        }
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellId = "DecisionCell_\(indexPath.section)_\(indexPath.row)"
         
@@ -139,11 +148,13 @@ class AccountViewController: UITableViewController {
                 iconLabel.font = UIFont(name: "Calibre", size: 24)
                 iconView.addSubview(iconLabel)
                 
-                let frameIconImageView = CGRect(x: 284, y: 6, width: 60, height: 72)
-                let iconImageView = UITextView(frame: frameIconImageView)
-                iconImageView.addSubview(iconUIView!)
-                resignedViews.insert(iconImageView)
-                iconView.addSubview(iconImageView)
+                if let iconV = iconUIView {
+                    let frameIconImageView = CGRect(x: 284, y: 6, width: 60, height: 72)
+                    let iconImageView = UITextView(frame: frameIconImageView)
+                    iconImageView.addSubview(iconV)
+                    resignedViews.insert(iconImageView)
+                    iconView.addSubview(iconImageView)
+                }
                 
                 cell.contentView.addSubview(iconView)
                 cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
@@ -224,12 +235,14 @@ class AccountViewController: UITableViewController {
                 telLabel.font = UIFont(name: "Calibre", size: 24)
                 telView.addSubview(telLabel)
                 
-                let telValueLabelFrame = CGRect(x: 140, y: 8, width: 204, height: 30)
-                let telValueLabel = UILabel(frame: telValueLabelFrame)
-                telValueLabel.text = personalData.valueForKey("phone") as? String
-                telValueLabel.font = UIFont(name: "Calibre", size: 24)
-                telValueLabel.textAlignment = NSTextAlignment.Right
-                telView.addSubview(telValueLabel)
+                if let telphone = personalData.valueForKey("phone") as? String {
+                    let telValueLabelFrame = CGRect(x: 140, y: 8, width: 204, height: 30)
+                    let telValueLabel = UILabel(frame: telValueLabelFrame)
+                    telValueLabel.text = telphone
+                    telValueLabel.font = UIFont(name: "Calibre", size: 24)
+                    telValueLabel.textAlignment = NSTextAlignment.Right
+                    telView.addSubview(telValueLabel)
+                }
                 
                 cell.contentView.addSubview(telView)
                 cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
@@ -241,33 +254,38 @@ class AccountViewController: UITableViewController {
                 addressLabel.text = "Address"
                 addressLabel.font = UIFont(name: "Calibre", size: 24)
                 addressView.addSubview(addressLabel)
-                
                 let addressDetailViewFrame = CGRect(x: 140, y: 0, width: 204, height: 114)
                 let addressDetailView = UIView(frame: addressDetailViewFrame)
-                let addressValueLabelFrame = CGRect(x: 0, y: 6, width: 204, height: 30)
-                let addressValueLabel = UILabel(frame: addressValueLabelFrame)
-                addressValueLabel.text = personalData.valueForKey("address") as? String
-                addressValueLabel.font = UIFont(name: "Calibre", size: 24)
-                addressValueLabel.textAlignment = NSTextAlignment.Right
-                addressDetailView.addSubview(addressValueLabel)
-                let cityStateZipValueLabelFrame = CGRect(x: 0, y: 42, width: 204, height: 30)
-                let cityStateZipValueLabel = UILabel(frame: cityStateZipValueLabelFrame)
-                let city = personalData.valueForKey("city") as? String
-                let state = personalData.valueForKey("state") as? String
-                let zipCode = personalData.valueForKey("zipCode") as? String
-                cityStateZipValueLabel.text = "\(city!), \(state!), \(zipCode!)"
-                cityStateZipValueLabel.font = UIFont(name: "Calibre", size: 24)
-                cityStateZipValueLabel.textAlignment = NSTextAlignment.Right
-                addressDetailView.addSubview(cityStateZipValueLabel)
-                let countryValueLabelFrame = CGRect(x: 0, y: 78, width: 204, height: 30)
-                let countryValueLabel = UILabel(frame: countryValueLabelFrame)
-                countryValueLabel.text = personalData.valueForKey("country") as? String
-                countryValueLabel.font = UIFont(name: "Calibre", size: 24)
-                countryValueLabel.textAlignment = NSTextAlignment.Right
-                addressDetailView.addSubview(countryValueLabel)
+                
+                if let address = personalData.valueForKey("address") as? String {
+                    let addressValueLabelFrame = CGRect(x: 0, y: 6, width: 204, height: 30)
+                    let addressValueLabel = UILabel(frame: addressValueLabelFrame)
+                    addressValueLabel.text = address
+                    addressValueLabel.font = UIFont(name: "Calibre", size: 24)
+                    addressValueLabel.textAlignment = NSTextAlignment.Right
+                    addressDetailView.addSubview(addressValueLabel)
+                }
+                
+                
+                if let city = personalData.valueForKey("city") as? String, state = personalData.valueForKey("state") as? String, zipCode = personalData.valueForKey("zipCode") as? String {
+                    let cityStateZipValueLabelFrame = CGRect(x: 0, y: 42, width: 204, height: 30)
+                    let cityStateZipValueLabel = UILabel(frame: cityStateZipValueLabelFrame)
+                    cityStateZipValueLabel.text = "\(city), \(state), \(zipCode)"
+                    cityStateZipValueLabel.font = UIFont(name: "Calibre", size: 24)
+                    cityStateZipValueLabel.textAlignment = NSTextAlignment.Right
+                    addressDetailView.addSubview(cityStateZipValueLabel)
+                }
+                
+                if let country = personalData.valueForKey("country") as? String {
+                    let countryValueLabelFrame = CGRect(x: 0, y: 78, width: 204, height: 30)
+                    let countryValueLabel = UILabel(frame: countryValueLabelFrame)
+                    countryValueLabel.text = country
+                    countryValueLabel.font = UIFont(name: "Calibre", size: 24)
+                    countryValueLabel.textAlignment = NSTextAlignment.Right
+                    addressDetailView.addSubview(countryValueLabel)
+                }
                 
                 addressView.addSubview(addressDetailView)
-                
                 cell.contentView.addSubview(addressView)
                 cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             case (1, 2):
@@ -275,13 +293,13 @@ class AccountViewController: UITableViewController {
                 
                 let timezoneLabelFrame = CGRect(x: 24, y: 8, width: 96, height: 30)
                 let timezoneLabel = UILabel(frame: timezoneLabelFrame)
-                timezoneLabel.text = "Telphone"
+                timezoneLabel.text = "Timezone"
                 timezoneLabel.font = UIFont(name: "Calibre", size: 24)
                 timezoneView.addSubview(timezoneLabel)
                 
                 let timezoneValueLabelFrame = CGRect(x: 140, y: 8, width: 204, height: 30)
                 let timezoneValueLabel = UILabel(frame: timezoneValueLabelFrame)
-                timezoneValueLabel.text = personalData.valueForKey("phone") as? String
+                timezoneValueLabel.text = personalData.valueForKey("timezone") as? String
                 timezoneValueLabel.font = UIFont(name: "Calibre", size: 24)
                 timezoneValueLabel.textAlignment = NSTextAlignment.Right
                 timezoneView.addSubview(timezoneValueLabel)
@@ -297,12 +315,14 @@ class AccountViewController: UITableViewController {
                 birthdayLabel.font = UIFont(name: "Calibre", size: 24)
                 birthdayView.addSubview(birthdayLabel)
                 
-                let birthdayValueLabelFrame = CGRect(x: 140, y: 8, width: 204, height: 30)
-                let birthdayValueLabel = UILabel(frame: birthdayValueLabelFrame)
-                birthdayValueLabel.text = personalData.valueForKey("birthday") as? String
-                birthdayValueLabel.font = UIFont(name: "Calibre", size: 24)
-                birthdayValueLabel.textAlignment = NSTextAlignment.Right
-                birthdayView.addSubview(birthdayValueLabel)
+                if let birthday = personalData.valueForKey("birthday") as? String {
+                    let birthdayValueLabelFrame = CGRect(x: 140, y: 8, width: 204, height: 30)
+                    let birthdayValueLabel = UILabel(frame: birthdayValueLabelFrame)
+                    birthdayValueLabel.text = birthday
+                    birthdayValueLabel.font = UIFont(name: "Calibre", size: 24)
+                    birthdayValueLabel.textAlignment = NSTextAlignment.Right
+                    birthdayView.addSubview(birthdayValueLabel)
+                }
                 
                 cell.contentView.addSubview(birthdayView)
                 cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
@@ -311,15 +331,15 @@ class AccountViewController: UITableViewController {
                 
                 let languageLabelFrame = CGRect(x: 24, y: 8, width: 96, height: 30)
                 let languageLabel = UILabel(frame: languageLabelFrame)
-                languageLabel.text = "Telphone"
+                languageLabel.text = "Language"
                 languageLabel.font = UIFont(name: "Calibre", size: 24)
                 languageView.addSubview(languageLabel)
                 
-                let languageValueLabelFrame = CGRect(x: 140, y: 8, width: 204, height: 30)
-                let languageValueLabel = UILabel(frame: languageValueLabelFrame)
                 
-                var language = ""
                 if let lan = personalData.valueForKey("preferredLanguage") as? String {
+                    let languageValueLabelFrame = CGRect(x: 140, y: 8, width: 204, height: 30)
+                    let languageValueLabel = UILabel(frame: languageValueLabelFrame)
+                    var language = ""
                     switch lan {
                     case "en":
                     language = "English"
@@ -328,22 +348,15 @@ class AccountViewController: UITableViewController {
                     default:
                     language = "Chinese"
                     }
+                    languageValueLabel.text = language
+                    languageValueLabel.font = UIFont(name: "Calibre", size: 24)
+                    languageValueLabel.textAlignment = NSTextAlignment.Right
+                    languageView.addSubview(languageValueLabel)
                 }
-                languageValueLabel.text = language
-                languageValueLabel.font = UIFont(name: "Calibre", size: 24)
-                languageValueLabel.textAlignment = NSTextAlignment.Right
-                languageView.addSubview(languageValueLabel)
                 
                 cell.contentView.addSubview(languageView)
                 cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-            case (3, 0):
-                let buttonView = UIView(frame: CGRect(x: 68, y: 6, width: 232, height: 44))
-                let signoutButton = UIButton(type: UIButtonType.RoundedRect)
-                signoutButton.setTitle("Sign Out", forState: UIControlState.Normal)
-                signoutButton.titleLabel?.font = UIFont(name: "Calibre", size: 24)
-                signoutButton.addTarget(self, action: #selector(self.signOut), forControlEvents: UIControlEvents.TouchDown)
-                buttonView.addSubview(signoutButton)
-                cell.contentView.addSubview(buttonView)
+
             default:
                 break;
             }
@@ -351,8 +364,11 @@ class AccountViewController: UITableViewController {
         }
     }
     
-    func signOut(sender: UIButton) {
-        
+    @IBAction func signOut(sender: AnyObject) {
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        userDefault.removeObjectForKey("authorities")
+        userDefault.removeObjectForKey("access_token")
+        performSegueWithIdentifier("signOut", sender: self)
     }
     /*
     // MARK: - Navigation

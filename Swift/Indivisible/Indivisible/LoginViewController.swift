@@ -68,7 +68,7 @@ class LoginViewController: UIViewController {
                     serverCallFailed = true
                 } else {
                     if let jsonResult=try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary {
-                        print("AsSynchronous\(jsonResult)")
+                        //print("AsSynchronous\(jsonResult)")
                         if let json_error = jsonResult.objectForKey("error") {
                             let alertView = UIAlertController(title: "Login Failed",
                                                               message: "The Username or Password you entered is incorrect. Please click 'Try Again' to reenter you Username and Password" as String, preferredStyle:.Alert)

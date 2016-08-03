@@ -140,7 +140,7 @@ class NewDecisionViewController: UITableViewController, UIPickerViewDelegate, UI
                 let categoriesPicker = UIPickerView(frame: frameCategoriesPicker)
                 categoriesPicker.accessibilityIdentifier = "Category"
                 categoriesPicker.layer.borderWidth = CGFloat(1.0)
-                categoriesPicker.layer.borderColor = UIColor.lightGrayColor().CGColor
+                categoriesPicker.layer.borderColor = UIColor.blackColor().CGColor
                 categoriesPicker.showsSelectionIndicator = true
                 categoriesPicker.delegate = self
                 categoriesPicker.dataSource = self
@@ -226,7 +226,7 @@ class NewDecisionViewController: UITableViewController, UIPickerViewDelegate, UI
                 let timezonePicker = UIPickerView(frame: frameTimezonePicker)
                 timezonePicker.accessibilityIdentifier = "Timezone"
                 timezonePicker.layer.borderWidth = CGFloat(1.0)
-                timezonePicker.layer.borderColor = UIColor.lightGrayColor().CGColor
+                timezonePicker.layer.borderColor = UIColor.blackColor().CGColor
                 timezonePicker.showsSelectionIndicator = true
                 timezonePicker.delegate = self
                 timezonePicker.dataSource = self

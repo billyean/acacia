@@ -8,8 +8,10 @@
 
 import UIKit
 
-class DecisionViewController: UITableViewController {
+class DecisionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var selection = 0
+    
+    @IBOutlet var tableView: UITableView!
     
     let public_selections = ["Public", "Private","Joined", "Created" , "Published", "Finished"]
     
@@ -23,6 +25,8 @@ class DecisionViewController: UITableViewController {
         let userDefault = NSUserDefaults.standardUserDefaults()
         let authories = userDefault.arrayForKey("authorities") as? [String]
         personel_view = authories! == ["ROLE_PUBLIC_USER"]
+        tableView.delegate = self
+        tableView.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,15 +34,15 @@ class DecisionViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return personel_view ? public_selections.count : admin_selections.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cellId:String
         var label: String
         
@@ -56,7 +60,7 @@ class DecisionViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         selection = indexPath.row
         performSegueWithIdentifier("PublishedSegue", sender: nil)
     }

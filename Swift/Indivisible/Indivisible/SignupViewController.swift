@@ -43,7 +43,7 @@ class SignupViewController: UIViewController {
                     do{
                         if let jsonResult=try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary {
                             print("AsSynchronous\(jsonResult)")
-                            if let json_error = jsonResult.objectForKey("errorCode") {
+                            if jsonResult.objectForKey("errorCode") != nil {
                                 if let errorMessage = jsonResult.objectForKey("message") {
                                     let alertView = UIAlertController(title: "Signed Up Failed",
                                                                       message: errorMessage as? String, preferredStyle:.Alert)

@@ -8,13 +8,18 @@
 
 import UIKit
 
-class DecisionDetailTableViewController: UITableViewController {
+class DecisionDetailTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var tabName:String = ""
     
     var publishedDecisions: [NSDictionary] = []
     
+    var decisionIds = [Int]()
+    
+    @IBOutlet var tableView: UITableView!
     @IBOutlet var navigationTopBar: UINavigationItem!
+    
+    var decision: NSDictionary?
     
     var personel_view = false
     
@@ -22,15 +27,64 @@ class DecisionDetailTableViewController: UITableViewController {
         self.tabName = tabName
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let joinedAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Join"){ action, indexPath in
+            let joiningURL: NSURL = NSURL(string: "http://52.39.71.64:8080/Indivisible_API/decisions/\(self.decisionIds[indexPath.row])/join")!
+            let request = NSMutableURLRequest(URL: joiningURL)
+            let session = NSURLSession.sharedSession()
+            request.HTTPMethod = "GET"
+            let userDefault = NSUserDefaults.standardUserDefaults()
+            let user_token = userDefault.stringForKey("access_token")!
+            let token = "Bearer \(user_token)"
             
+            request.setValue(token, forHTTPHeaderField: "Authorization")
+            request.setValue("*/*", forHTTPHeaderField: "Accept")
+            
+            let semaphore: dispatch_semaphore_t = dispatch_semaphore_create(0)
+            var succeed = false
+            let task = session.dataTaskWithRequest(request){data, response, error in
+                if let httpError = error {
+                    print("\(httpError)")
+                } else {
+                    do{
+                        if let jsonResult=try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary {
+                            print("jsonResult:\(jsonResult)")
+                            if let json_error = jsonResult.objectForKey("errorCode") {
+                                let errorMsg = jsonResult.objectForKey("message")
+                                let alertView = UIAlertController(title: "Not able to join this decision", message: errorMsg! as? String, preferredStyle:.Alert)
+                                let okAction = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+                                alertView.addAction(okAction)
+                                dispatch_async(dispatch_get_main_queue()) {
+                                    self.presentViewController(alertView, animated: true, completion: nil)
+                                }
+                            } else {
+                                self.decision = jsonResult
+                                succeed = true
+                            }
+                        }
+                        
+                    } catch let error as NSError {
+                        print("An error occurred: \(error)")
+                    }
+                }
+                dispatch_semaphore_signal(semaphore)
+            }
+            task.resume()
+            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+            if succeed {
+                self.performSegueWithIdentifier("joinDecision", sender: nil)
+            }
         }
         return [joinedAction]
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let targetVC  = segue.destinationViewController as? JoinDecisionViewController
+        targetVC?.setDecisionInfo(decision)
     }
     
     func decisionsUri(tabName: String) -> String {
@@ -65,7 +119,7 @@ class DecisionDetailTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     
     }
     
@@ -95,19 +149,21 @@ class DecisionDetailTableViewController: UITableViewController {
                 print("\(httpError)")
             } else {
                 do{
-                if let jsonResult=try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as? [NSDictionary] {
-                    print("AsSynchronous\(jsonResult)")
-                    self.publishedDecisions = jsonResult
+                    if let jsonResult=try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as? [NSDictionary] {
+                        print("AsSynchronous\(jsonResult)")
+                        self.publishedDecisions = jsonResult
+                    }
+                    
+                } catch let error as NSError {
+                    print("An error occurred: \(error)")
                 }
-                
-            } catch let error as NSError {
-                print("An error occurred: \(error)")
-            }
             }
             dispatch_semaphore_signal(semaphore)
         }
         task.resume()
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.rowHeight = 120
     }
     
@@ -116,15 +172,15 @@ class DecisionDetailTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return publishedDecisions.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellId = "DecisionId"
         
         if let cell = tableView.dequeueReusableCellWithIdentifier(cellId) {
@@ -134,6 +190,7 @@ class DecisionDetailTableViewController: UITableViewController {
             cell.separatorInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
             
             let decision = publishedDecisions[indexPath.row]
+            self.decisionIds.append(decision["id"] as! Int)
             let state = String(decision["state"]!)
             cell.textLabel?.text = "State: \(state)"
             cell.textLabel?.font = UIFont(name: "Calibri", size: 20)
